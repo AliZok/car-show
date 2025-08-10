@@ -511,11 +511,11 @@ function Header() {
     <header className="fixed top-0 z-50 w-full bg-black/80 backdrop-blur-md border-b border-[#940019]/20">
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
         <a href="#" onClick={() => scrollToSection('home')} className="flex items-center gap-3 font-bold text-xl hover:scale-105 transition-transform duration-300 cursor-pointer">
-          <div className="p-2 bg-[#940019] rounded-lg animate-glow">
-            <Car className="h-6 w-6 text-white" />
+          <div className="p-2 rounded-lg ">
+            <Car className="h-6 w-6 text-[#940019]" />
           </div>
           <span className="bg-gradient-to-r from-white to-[#b3001f] bg-clip-text text-transparent">
-            Elite Car Show
+            Excellent
           </span>
         </a>
         <nav>
