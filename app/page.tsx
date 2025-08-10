@@ -139,6 +139,25 @@ export default function Page() {
 
       <Header />
 
+      {/* Attractive Full-Page Animated Author Credit Layer */}
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 animate-fade-in-out">
+        {/* Main content */}
+        <div className="relative z-10 text-center px-8 py-12">
+          {/* Simple text container */}
+          <div className="relative">
+            {/* Main text */}
+            <div className="relative z-10">
+              <h1 className="text-6xl md:text-8xl font-black mb-6 text-white animate-pulse">
+                by
+              </h1>
+              <h2 className="text-7xl md:text-9xl font-black text-white mb-8 animate-bounce">
+                Ali Zokaei
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image with Parallax */}
