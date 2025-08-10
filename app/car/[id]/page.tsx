@@ -230,7 +230,7 @@ export default function CarDetailPage({ params }: { params: Promise<{ id: string
       {/* Footer */}
       <footer className="bg-black border-t border-red-500/20 py-12 text-center text-red-300">
         <div className="container mx-auto px-4">
-          <p>© {new Date().getFullYear()} Elite Car Show. All rights reserved.</p>
+          <p>© 2025 Elite Car Show. All rights reserved.</p>
         </div>
       </footer>
     </main>

@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Car, MapPin, Phone, Instagram, Facebook, Twitter, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
@@ -66,41 +66,151 @@ const cars = [
 ]
 
 export default function Page() {
+  const [scrollY, setScrollY] = useState(0)
+  const [scrollDirection, setScrollDirection] = useState('down')
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      setScrollDirection(currentScrollY > lastScrollY ? 'down' : 'up')
+      setLastScrollY(currentScrollY)
+      setScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
+
+  const getScrollIntensity = () => Math.min(scrollY / 1000, 1)
+  const getParallaxOffset = (speed: number) => scrollY * speed
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#7a0015] via-black to-[#940019] text-white">
-      {/* Animated background */}
+      {/* Animated background with scroll effects */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(148,0,25,0.3),transparent)] animate-pulse"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(148,0,25,0.2),transparent)] animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div 
+          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(148,0,25,0.3),transparent)] animate-pulse transition-all duration-1000"
+          style={{
+            transform: `scale(${1 + getScrollIntensity() * 0.2})`,
+            opacity: 0.8 + getScrollIntensity() * 0.2
+          }}
+        ></div>
+        <div 
+          className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(148,0,25,0.2),transparent)] animate-pulse transition-all duration-1000"
+          style={{
+            animationDelay: '1s',
+            transform: `translateY(${getParallaxOffset(0.1)}px) scale(${1 + getScrollIntensity() * 0.1})`
+          }}
+        ></div>
+        
+        {/* Scroll-triggered floating particles - Only render on client to prevent hydration mismatch */}
+        {isClient && (
+          <div 
+            className="absolute inset-0 opacity-30 transition-all duration-1000"
+            style={{ opacity: 0.1 + getScrollIntensity() * 0.4 }}
+          >
+            {[...Array(20)].map((_, i) => {
+              // Use deterministic values based on index to avoid hydration mismatch
+              const left = (i * 5.5 + (i % 3) * 7) % 100
+              const top = (i * 4.2 + (i % 5) * 6) % 100
+              const animationDelay = (i * 0.3 + (i % 4) * 0.2) % 2
+              const animationDuration = 2 + (i % 4) * 0.8
+              
+              return (
+                <div
+                  key={i}
+                  className="absolute w-1 h-1 bg-[#940019] rounded-full animate-pulse"
+                  style={{
+                    left: `${left}%`,
+                    top: `${top}%`,
+                    animationDelay: `${animationDelay}s`,
+                    animationDuration: `${animationDuration}s`,
+                    transform: `translateY(${getParallaxOffset(0.05)}px)`
+                  }}
+                />
+              )
+            })}
+          </div>
+        )}
       </div>
 
       <Header />
 
       {/* Hero Section */}
       <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+        {/* Background Image with Parallax */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/maxresdefault.jpg"
             alt="Luxury Car Background"
             fill
-            className="object-cover filter grayscale brightness-50"
+            className="object-cover filter grayscale brightness-50 transition-transform duration-1000"
+            style={{
+              transform: `scale(${1 + getScrollIntensity() * 0.1}) translateY(${getParallaxOffset(0.2)}px)`
+            }}
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#7a0015]/80 via-black/70 to-[#940019]/80"></div>
+          <div 
+            className="absolute inset-0 bg-gradient-to-br from-[#7a0015]/80 via-black/70 to-[#940019]/80 transition-all duration-1000"
+            style={{
+              background: `linear-gradient(to bottom right, rgba(122, 0, 21, ${0.8 + getScrollIntensity() * 0.2}), rgba(0, 0, 0, 0.7), rgba(148, 0, 25, ${0.8 + getScrollIntensity() * 0.2}))`
+            }}
+          ></div>
         </div>
         
-        <div className="relative z-10 text-center px-4">
+        <div 
+          className="relative z-10 text-center px-4 transition-all duration-1000"
+          style={{
+            transform: `translateY(${getParallaxOffset(-0.3)}px) scale(${1 - getScrollIntensity() * 0.1})`,
+            opacity: 1 - getScrollIntensity() * 0.3
+          }}
+        >
           <div className="animate-fade-in-up">
-            <Badge className="bg-[#940019] hover:bg-[#b3001f] text-white border-0 mb-8 text-sm font-medium px-4 py-2 animate-bounce">
+            <Badge 
+              className="bg-[#940019] hover:bg-[#b3001f] text-white border-0 mb-8 text-sm font-medium px-4 py-2 animate-bounce transition-all duration-500"
+              style={{
+                transform: `scale(${1 + getScrollIntensity() * 0.2})`,
+                boxShadow: `0 0 ${20 + getScrollIntensity() * 30}px rgba(148, 0, 25, ${0.5 + getScrollIntensity() * 0.5})`
+              }}
+            >
               June 15-17, 2025
             </Badge>
-            <h1 className="text-6xl md:text-8xl font-black tracking-tight mb-8 drop-shadow-2xl">
+            <h1 
+              className="text-6xl md:text-8xl font-black tracking-tight mb-8 drop-shadow-2xl transition-all duration-1000"
+              style={{
+                textShadow: `0 0 ${30 + getScrollIntensity() * 50}px rgba(148, 0, 25, ${0.8 + getScrollIntensity() * 0.2})`
+              }}
+            >
               Elite Car Show
             </h1>
-            <p className="text-xl md:text-2xl text-[#b3001f] mb-12 max-w-2xl mx-auto font-light drop-shadow-lg">
+            <p 
+              className="text-xl md:text-2xl text-[#b3001f] mb-12 max-w-2xl mx-auto font-light drop-shadow-lg transition-all duration-1000"
+              style={{
+                opacity: 0.8 + getScrollIntensity() * 0.2,
+                transform: `translateY(${getScrollIntensity() * 20}px)`
+              }}
+            >
               Where luxury meets innovation
             </p>
+          </div>
+        </div>
+        
+        {/* Scroll indicator */}
+        <div 
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 transition-all duration-1000"
+          style={{
+            opacity: 1 - getScrollIntensity() * 0.8,
+            transform: `translateY(${getScrollIntensity() * 50}px)`
+          }}
+        >
+          <div className="flex flex-col items-center text-[#b3001f] animate-bounce">
+            <span className="text-sm mb-2">Scroll to explore</span>
+            <div className="w-6 h-10 border-2 border-[#940019] rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-[#940019] rounded-full mt-2 animate-pulse"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -110,71 +220,44 @@ export default function Page() {
         <div className="absolute inset-0">
           <Carousel cars={cars} />
         </div>
+        
+        {/* Scroll-triggered background effect */}
+        <div 
+          className="absolute inset-0 pointer-events-none transition-all duration-1000"
+          style={{
+            background: `radial-gradient(circle at 50% ${50 + getScrollIntensity() * 30}%, rgba(148, 0, 25, ${0.1 + getScrollIntensity() * 0.2}), transparent)`,
+            opacity: getScrollIntensity() * 0.8
+          }}
+        ></div>
       </section>
 
-      {/* Event Info */}
-      <section id="info" className="py-24 bg-gradient-to-br from-[#7a0015] to-black text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8 animate-slide-in-left">
-              <h2 className="text-5xl font-black mb-8">Event Details</h2>
-              <div className="space-y-6">
-                <div className="flex items-center gap-4 p-4 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25">
-                  <MapPin className="w-6 h-6 text-[#940019]" />
-                  <div>
-                    <div className="font-medium text-lg">Los Angeles Convention Center</div>
-                    <div className="text-[#b3001f]">1201 S Figueroa St, Los Angeles, CA</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-4 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25">
-                  <Phone className="w-6 h-6 text-[#940019]" />
-                  <div>
-                    <div className="font-medium text-lg">Contact & Tickets</div>
-                    <div className="text-[#b3001f]">+1 (213) 555-0123</div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="flex gap-4">
-                <a href="https://instagram.com" className="p-3 bg-[#940019]/20 rounded-lg hover:bg-[#940019]/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#940019]/25">
-                  <Instagram className="w-6 h-6" />
-                </a>
-                <a href="https://facebook.com" className="p-3 bg-[#940019]/20 rounded-lg hover:bg-[#940019]/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#940019]/25">
-                  <Facebook className="w-6 h-6" />
-                </a>
-                <a href="https://twitter.com" className="p-3 bg-[#940019]/20 rounded-lg hover:bg-[#940019]/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#940019]/25">
-                  <Twitter className="w-6 h-6" />
-                </a>
-              </div>
-            </div>
-            
-            <div className="relative animate-slide-in-right">
-              <Image
-                src="/images/mixcollage-21-oct-2024-10-45-am-6299.avif"
-                alt="LA Convention Center"
-                width={600}
-                height={400}
-                className="rounded-lg shadow-2xl hover-lift"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 bg-gradient-to-br from-black to-[#940019] text-white">
-        <div className="container mx-auto px-4">
+      <section id="contact" className="py-24 bg-gradient-to-br from-black to-[#940019] text-white relative overflow-hidden">
+        {/* Scroll-triggered background pattern */}
+        <div 
+          className="absolute inset-0 pointer-events-none transition-all duration-1000"
+          style={{
+            background: `radial-gradient(circle at ${30 + getScrollIntensity() * 40}% ${70 - getScrollIntensity() * 20}%, rgba(148, 0, 25, ${0.05 + getScrollIntensity() * 0.1}), transparent)`,
+            opacity: 0.3 + getScrollIntensity() * 0.7
+          }}
+        ></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-black mb-8">Contact Us</h2>
-            <p className="text-xl text-[#b3001f] max-w-2xl mx-auto">
+            <h2 className="text-5xl font-black mb-8 animate-fade-in-up">
+              Contact Us
+            </h2>
+            <p className="text-xl text-[#b3001f] max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
               Get in touch with us for any questions about the Elite Car Show
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8 animate-slide-in-left">
+            <div className="space-y-8">
               <div className="space-y-6">
-                <div className="flex items-center gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25">
+                <div className="flex items-center gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25 animate-slide-in-left">
                   <MapPin className="w-8 h-8 text-[#940019]" />
                   <div>
                     <div className="font-medium text-xl">Location</div>
@@ -182,14 +265,14 @@ export default function Page() {
                     <div className="text-[#b3001f]">1201 S Figueroa St, Los Angeles, CA</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25">
+                <div className="flex items-center gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25 animate-slide-in-left" style={{ animationDelay: '0.1s' }}>
                   <Phone className="w-8 h-8 text-[#940019]" />
                   <div>
                     <div className="font-medium text-xl">Phone</div>
                     <div className="text-[#b3001f]">+1 (213) 555-0123</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25">
+                <div className="flex items-center gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25 animate-slide-in-left" style={{ animationDelay: '0.2s' }}>
                   <div className="w-8 h-8 text-[#940019] flex items-center justify-center">
                     <span className="text-2xl">✉</span>
                   </div>
@@ -200,14 +283,14 @@ export default function Page() {
                 </div>
               </div>
               
-              <div className="flex gap-4">
-                <a href="https://instagram.com" className="p-4 bg-[#940019]/20 rounded-lg hover:bg-[#940019]/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#940019]/25">
+              <div className="flex gap-4 animate-slide-in-left" style={{ animationDelay: '0.3s' }}>
+                <a href="https://instagram.com" className="p-4 bg-[#940019]/20 rounded-lg hover:bg-[#940019]/30 transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-[#940019]/25">
                   <Instagram className="w-8 h-8" />
                 </a>
-                <a href="https://facebook.com" className="p-4 bg-[#940019]/20 rounded-lg hover:bg-[#940019]/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#940019]/25">
+                <a href="https://facebook.com" className="p-4 bg-[#940019]/20 rounded-lg hover:bg-[#940019]/30 transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-[#940019]/25">
                   <Facebook className="w-8 h-8" />
                 </a>
-                <a href="https://twitter.com" className="p-4 bg-[#940019]/20 rounded-lg hover:bg-[#940019]/30 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-[#940019]/25">
+                <a href="https://twitter.com" className="p-4 bg-[#940019]/20 rounded-lg hover:bg-[#940019]/30 transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-[#940019]/25">
                   <Twitter className="w-8 h-8" />
                 </a>
               </div>
@@ -219,7 +302,7 @@ export default function Page() {
                 alt="Contact Us"
                 width={600}
                 height={400}
-                className="rounded-lg shadow-2xl hover-lift"
+                className="rounded-lg shadow-2xl hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
@@ -400,7 +483,6 @@ function Header() {
         <nav>
           <ul className="flex items-center gap-8 text-[#b3001f]">
             <li><a onClick={() => scrollToSection('cars')} className="hover:text-white transition-colors duration-300 hover:scale-105 inline-block cursor-pointer">Cars</a></li>
-            <li><a onClick={() => scrollToSection('info')} className="hover:text-white transition-colors duration-300 hover:scale-105 inline-block cursor-pointer">Info</a></li>
             <li><a onClick={() => scrollToSection('contact')} className="hover:text-white transition-colors duration-300 hover:scale-105 inline-block cursor-pointer">Contact</a></li>
           </ul>
         </nav>
@@ -410,10 +492,17 @@ function Header() {
 }
 
 function Footer() {
+  const [currentYear, setCurrentYear] = React.useState('')
+  
+  // Use useEffect to set year on client side to prevent hydration mismatch
+  React.useEffect(() => {
+    setCurrentYear(new Date().getFullYear().toString())
+  }, [])
+  
   return (
     <footer className="bg-black border-t border-[#940019]/20 py-12 text-center text-[#b3001f]">
       <div className="container mx-auto px-4">
-        <p>© {new Date().getFullYear()} Elite Car Show. All rights reserved.</p>
+        <p>© {currentYear || '2025'} Elite Car Show. All rights reserved.</p>
       </div>
     </footer>
   )
