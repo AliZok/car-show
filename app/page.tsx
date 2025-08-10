@@ -418,10 +418,10 @@ function Carousel({ cars }: { cars: Array<{
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none"></div>
               
               {/* Slide Title and Content */}
-              <div className="absolute bottom-0 left-0 right-0 p-12 text-white">
+              <div className="absolute bottom-0 left-0 right-0 p-12 text-white pointer-events-none">
                 <div className={`transition-all duration-1000 delay-300 ${
                   index === currentSlide ? 'animate-slide-up' : 'opacity-0 translate-y-10'
                 }`}>
@@ -451,7 +451,7 @@ function Carousel({ cars }: { cars: Array<{
                   {/* View Details Button */}
                   <a 
                     href={`/car/${car.id}`}
-                    className="inline-block mt-8 bg-[#940019] hover:bg-[#b3001f] text-white py-4 px-8 rounded-lg text-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#940019]/50"
+                    className="inline-block mt-8 bg-[#940019] hover:bg-[#b3001f] text-white py-4 px-8 rounded-lg text-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#940019]/50 pointer-events-auto"
                   >
                     View Details
                   </a>
@@ -465,26 +465,32 @@ function Carousel({ cars }: { cars: Array<{
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-8 top-1/2 -translate-y-1/2 bg-black/40 backdrop-blur-sm text-white p-4 rounded-full hover:bg-black/60 transition-all duration-300 transform hover:scale-110 hover:shadow-2xl hover:shadow-[#940019]/50 z-10"
+        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm text-white p-3 md:p-4 rounded-full hover:bg-black/80 active:bg-black/90 transition-all duration-300 transform hover:scale-110 active:scale-95 hover:shadow-2xl hover:shadow-[#940019]/50 z-50 touch-manipulation"
+        style={{ minWidth: '48px', minHeight: '48px' }}
+        aria-label="Previous slide"
       >
-        <ChevronLeft className="w-8 h-8" />
+        <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-8 top-1/2 -translate-y-1/2 bg-black/40 backdrop-blur-sm text-white p-4 rounded-full hover:bg-black/60 transition-all duration-300 transform hover:scale-110 hover:shadow-2xl hover:shadow-[#940019]/50 z-10"
+        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 bg-black/60 backdrop-blur-sm text-white p-3 md:p-4 rounded-full hover:bg-black/80 active:bg-black/90 transition-all duration-300 transform hover:scale-110 active:scale-95 hover:shadow-2xl hover:shadow-[#940019]/50 z-50 touch-manipulation"
+        style={{ minWidth: '48px', minHeight: '48px' }}
+        aria-label="Next slide"
       >
-        <ChevronRight className="w-8 h-8" />
+        <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
       </button>
 
       {/* Dots Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-4 z-10">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-4 z-50">
         {cars.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-4 h-4 rounded-full transition-all duration-300 ${
+            className={`w-4 h-4 md:w-4 md:h-4 rounded-full transition-all duration-300 touch-manipulation ${
               index === currentSlide ? 'bg-[#940019] scale-125 shadow-lg shadow-[#940019]/50' : 'bg-white/50 hover:bg-white/80'
             }`}
+            style={{ minWidth: '24px', minHeight: '24px' }}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
