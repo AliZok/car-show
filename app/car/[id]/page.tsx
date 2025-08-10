@@ -97,8 +97,9 @@ const cars = [
   }
 ]
 
-export default function CarDetailPage({ params }: { params: { id: string } }) {
-  const car = cars.find(c => c.id === parseInt(params.id))
+export default function CarDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = React.use(params)
+  const car = cars.find(c => c.id === parseInt(id))
   
   if (!car) {
     return (
