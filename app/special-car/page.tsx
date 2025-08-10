@@ -38,7 +38,7 @@ export default function SpecialCarPage() {
         <div className="grid gap-8 md:grid-cols-2">
           <div className="overflow-hidden rounded-2xl border border-white/10">
             <Image
-              src="/placeholder.svg?height=720&width=1080"
+              src="/images/pngtree-futuristic-midengine-sports-car-on-sleek-black-background-3d-rendering-picture-image_5819473.jpg"
               alt="Special edition red supercar front three-quarter view"
               width={1080}
               height={720}
@@ -146,12 +146,12 @@ export default function SpecialCarPage() {
           <p className="mt-2 text-neutral-300">Design close-ups and track-ready stance.</p>
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-          <GalleryImage url="/placeholder.svg?height=640&width=960" alt="Carbon fiber splitter macro" />
-          <GalleryImage url="/placeholder.svg?height=640&width=960" alt="Rear wing active aero close-up" />
-          <GalleryImage url="/placeholder.svg?height=640&width=960" alt="Alcantara interior with red stitching" />
-          <GalleryImage url="/placeholder.svg?height=640&width=960" alt="Engine bay hybrid system" />
-          <GalleryImage url="/placeholder.svg?height=640&width=960" alt="Side profile with track stance" />
-          <GalleryImage url="/placeholder.svg?height=640&width=960" alt="Forged wheels with red calipers" />
+          <GalleryImage url="/images/BMW-i8-3.jpg" alt="Carbon fiber splitter macro" />
+          <GalleryImage url="/images/20190225_bmw_i8_coupe.jpg" alt="Rear wing active aero close-up" />
+          <GalleryImage url="/images/Modern_Luxury_1.jpg" alt="Alcantara interior with red stitching" />
+          <GalleryImage url="/images/1FDF780E-789E-42C8-9C51-5B91D8FCD7D2.jpeg" alt="Engine bay hybrid system" />
+          <GalleryImage url="/images/mercedes-benz-tridy-g-695103-L-3b1c66b91c52fba13b1c.jpg" alt="Side profile with track stance" />
+          <GalleryImage url="/images/Neue-Sportwagen-2019-2020-2021-2022-und-2023-1200x800-e1e41e54610e1775.jpg" alt="Forged wheels with red calipers" />
         </div>
       </section>
 
@@ -195,7 +195,7 @@ function GalleryImage({ url, alt }: { url: string; alt: string }) {
   return (
     <div className="group overflow-hidden rounded-xl border border-white/10">
       <Image
-        src={url || "/placeholder.svg"}
+        src={url || "/images/BMW-i8-3.jpg"}
         alt={alt}
         width={960}
         height={640}

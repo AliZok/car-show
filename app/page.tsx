@@ -44,7 +44,7 @@ export default function Page() {
             <div className="relative">
               <div className="absolute inset-0 -z-10 bg-[radial-gradient(600px_300px_at_80%_20%,rgba(239,68,68,0.25),transparent)]" />
               <Image
-                src="/placeholder.svg?height=720&width=1080"
+                src="/images/20190225_bmw_i8_coupe.jpg"
                 alt="Red supercar in a dark showroom with dramatic lighting"
                 width={1080}
                 height={720}
@@ -83,15 +83,15 @@ export default function Page() {
           subtitle="A glimpse of what’s waiting under the lights."
         />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-          <GalleryImage url="/placeholder.svg?height=640&width=960" alt="Carbon fiber detail under red light" />
+          <GalleryImage url="/images/BMW-i8-3.jpg" alt="Carbon fiber detail under red light" />
           <GalleryImage
-            url="/placeholder.svg?height=640&width=960"
+            url="/images/pngtree-futuristic-midengine-sports-car-on-sleek-black-background-3d-rendering-picture-image_5819473.jpg"
             alt="Concept car side profile with red accent light"
           />
-          <GalleryImage url="/placeholder.svg?height=640&width=960" alt="EV hypercar rear lights glowing" />
-          <GalleryImage url="/placeholder.svg?height=640&width=960" alt="Classic muscle car front grille" />
-          <GalleryImage url="/placeholder.svg?height=640&width=960" alt="High gloss red and black wheel rim" />
-          <GalleryImage url="/placeholder.svg?height=640&width=960" alt="Supercar engine bay with red accents" />
+          <GalleryImage url="/images/1FDF780E-789E-42C8-9C51-5B91D8FCD7D2.jpeg" alt="EV hypercar rear lights glowing" />
+          <GalleryImage url="/images/mercedes-benz-tridy-g-695103-L-3b1c66b91c52fba13b1c.jpg" alt="Classic muscle car front grille" />
+          <GalleryImage url="/images/Neue-Sportwagen-2019-2020-2021-2022-und-2023-1200x800-e1e41e54610e1775.jpg" alt="High gloss red and black wheel rim" />
+          <GalleryImage url="/images/Modern_Luxury_1.jpg" alt="Supercar engine bay with red accents" />
         </div>
       </section>
 
@@ -131,7 +131,7 @@ export default function Page() {
           </Card>
           <div className="overflow-hidden rounded-xl border border-white/10">
             <Image
-              src="/placeholder.svg?height=600&width=900"
+              src="/images/mixcollage-21-oct-2024-10-45-am-6299.avif"
               alt="LA Convention Center at night with red lights"
               width={900}
               height={600}
@@ -145,10 +145,23 @@ export default function Page() {
       <section id="sponsors" className="container mx-auto px-4 py-16">
         <SectionHeader eyebrow="Partners" title="Sponsors & Exhibitors" subtitle="Powered by industry leaders." />
         <div className="mt-8 grid grid-cols-2 gap-8 opacity-80 sm:grid-cols-3 md:grid-cols-6">
-          {Array.from({ length: 12 }).map((_, i) => (
+          {[
+            "/images/BMW-i8-3.jpg",
+            "/images/20190225_bmw_i8_coupe.jpg",
+            "/images/pngtree-futuristic-midengine-sports-car-on-sleek-black-background-3d-rendering-picture-image_5819473.jpg",
+            "/images/1FDF780E-789E-42C8-9C51-5B91D8FCD7D2.jpeg",
+            "/images/mercedes-benz-tridy-g-695103-L-3b1c66b91c52fba13b1c.jpg",
+            "/images/Neue-Sportwagen-2019-2020-2021-2022-und-2023-1200x800-e1e41e54610e1775.jpg",
+            "/images/Modern_Luxury_1.jpg",
+            "/images/mixcollage-21-oct-2024-10-45-am-6299.avif",
+            "/images/b18aa0287.jpg",
+            "/images/67400bf7fa0d2eb7e3ae6a3b2f2691c6.jpg",
+            "/images/c302e1b4e7f99d19f88939c3a2775f47.jpg",
+            "/images/maxresdefault.jpg"
+          ].map((src, i) => (
             <Image
               key={i}
-              src="/placeholder.svg?height=80&width=160"
+              src={src}
               alt={`Sponsor logo ${i + 1}`}
               width={160}
               height={80}
@@ -192,7 +205,7 @@ export default function Page() {
             </div>
             <div className="overflow-hidden rounded-xl border border-white/10">
               <Image
-                src="/placeholder.svg?height=520&width=800"
+                src="/images/b18aa0287.jpg"
                 alt="Red neon tunnel with supercar silhouette"
                 width={800}
                 height={520}
@@ -312,7 +325,7 @@ function GalleryImage({ url, alt }: { url: string; alt: string }) {
   return (
     <div className="group overflow-hidden rounded-xl border border-white/10">
       <Image
-        src={url || "/placeholder.svg"}
+        src={url || "/images/BMW-i8-3.jpg"}
         alt={alt}
         width={960}
         height={640}
