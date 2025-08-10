@@ -298,7 +298,7 @@ export default function Page() {
             
             <div className="relative animate-slide-in-right">
               <Image
-                src="/images/c302e1b4e7f99d19f88939c3a2775f47.jpg"
+                src="/images/1FDF780E-789E-42C8-9C51-5B91D8FCD7D2.jpeg"
                 alt="Contact Us"
                 width={600}
                 height={400}
