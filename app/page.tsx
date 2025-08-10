@@ -276,12 +276,12 @@ export default function Page() {
           <div className="grid md:grid-cols-2 gap-16 items-start">
             <div className="space-y-8 h-full flex flex-col justify-between">
               <div className="space-y-6">
-                <div className="flex items-start gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25 animate-slide-in-left h-32">
-                  <MapPin className="w-8 h-8 text-[#940019] mt-1" />
-                  <div className="flex-1">
+                <div className="flex items-start gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25 animate-slide-in-left min-h-32">
+                  <MapPin className="w-8 h-8 text-[#940019] mt-1 flex-shrink-0" />
+                  <div className="flex-1 min-w-0">
                     <div className="font-medium text-xl">Location</div>
-                    <div className="text-[#b3001f]">Tehran International Exhibition Center</div>
-                    <div className="text-[#b3001f]">Shahid Chamran Highway, Tehran, Iran</div>
+                    <div className="text-[#b3001f] break-words">Tehran International Exhibition Center</div>
+                    <div className="text-[#b3001f] break-words">Shahid Chamran Highway, Tehran, Iran</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25 animate-slide-in-left h-32" style={{ animationDelay: '0.1s' }}>
