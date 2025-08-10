@@ -254,29 +254,29 @@ export default function Page() {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            <div className="space-y-8 h-full flex flex-col justify-between">
               <div className="space-y-6">
-                <div className="flex items-center gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25 animate-slide-in-left">
-                  <MapPin className="w-8 h-8 text-[#940019]" />
-                  <div>
+                <div className="flex items-start gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25 animate-slide-in-left h-32">
+                  <MapPin className="w-8 h-8 text-[#940019] mt-1" />
+                  <div className="flex-1">
                     <div className="font-medium text-xl">Location</div>
                     <div className="text-[#b3001f]">Los Angeles Convention Center</div>
                     <div className="text-[#b3001f]">1201 S Figueroa St, Los Angeles, CA</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25 animate-slide-in-left" style={{ animationDelay: '0.1s' }}>
-                  <Phone className="w-8 h-8 text-[#940019]" />
-                  <div>
+                <div className="flex items-start gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25 animate-slide-in-left h-32" style={{ animationDelay: '0.1s' }}>
+                  <Phone className="w-8 h-8 text-[#940019] mt-1" />
+                  <div className="flex-1">
                     <div className="font-medium text-xl">Phone</div>
                     <div className="text-[#b3001f]">+1 (213) 555-0123</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25 animate-slide-in-left" style={{ animationDelay: '0.2s' }}>
-                  <div className="w-8 h-8 text-[#940019] flex items-center justify-center">
+                <div className="flex items-start gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25 animate-slide-in-left h-32" style={{ animationDelay: '0.2s' }}>
+                  <div className="w-8 h-8 text-[#940019] flex items-center justify-center mt-1">
                     <span className="text-2xl">✉</span>
                   </div>
-                  <div>
+                  <div className="flex-1">
                     <div className="font-medium text-xl">Email</div>
                     <div className="text-[#b3001f]">info@elitecarshow.com</div>
                   </div>
@@ -296,14 +296,35 @@ export default function Page() {
               </div>
             </div>
             
-            <div className="relative animate-slide-in-right">
+            <div className="relative animate-slide-in-right h-[400px]">
               <Image
                 src="/images/1FDF780E-789E-42C8-9C51-5B91D8FCD7D2.jpeg"
                 alt="Contact Us"
                 width={600}
                 height={400}
-                className="rounded-lg shadow-2xl hover:scale-105 transition-transform duration-500"
+                className="rounded-lg shadow-2xl hover:scale-105 transition-transform duration-500 w-full h-full object-cover"
               />
+              {/* Animated Text Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-lg flex items-end">
+                <div className="p-8 w-full">
+                  <div className="text-white space-y-2">
+                    <h3 className="text-3xl font-bold animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+                      Visit Our Show
+                    </h3>
+                    <p className="text-lg opacity-90 animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
+                      Experience the ultimate luxury car exhibition
+                    </p>
+                    <div className="flex gap-3 mt-4">
+                      <span className="px-4 py-2 bg-[#940019] text-white rounded-full text-sm font-medium animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
+                        Premium Cars
+                      </span>
+                      <span className="px-4 py-2 bg-white/20 text-white rounded-full text-sm font-medium animate-fade-in-up" style={{ animationDelay: '1.1s' }}>
+                        Luxury Experience
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
