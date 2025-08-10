@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { Car, MapPin, Phone, Instagram, Facebook, Twitter, ChevronLeft, ChevronRight } from "lucide-react"
+import { Car, MapPin, Phone, Mail, Instagram, Facebook, Twitter, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 
@@ -280,21 +280,19 @@ export default function Page() {
                   <MapPin className="w-8 h-8 text-[#940019] mt-1" />
                   <div className="flex-1">
                     <div className="font-medium text-xl">Location</div>
-                    <div className="text-[#b3001f]">Los Angeles Convention Center</div>
-                    <div className="text-[#b3001f]">1201 S Figueroa St, Los Angeles, CA</div>
+                    <div className="text-[#b3001f]">Tehran International Exhibition Center</div>
+                    <div className="text-[#b3001f]">Shahid Chamran Highway, Tehran, Iran</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25 animate-slide-in-left h-32" style={{ animationDelay: '0.1s' }}>
                   <Phone className="w-8 h-8 text-[#940019] mt-1" />
                   <div className="flex-1">
                     <div className="font-medium text-xl">Phone</div>
-                    <div className="text-[#b3001f]">+1 (213) 555-0123</div>
+                    <div className="text-[#b3001f]">88037099</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 p-6 bg-[#940019]/30 rounded-lg border border-[#940019]/20 hover:border-[#940019]/40 transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-[#940019]/25 animate-slide-in-left h-32" style={{ animationDelay: '0.2s' }}>
-                  <div className="w-8 h-8 text-[#940019] flex items-center justify-center mt-1">
-                    <span className="text-2xl">✉</span>
-                  </div>
+                  <Mail className="w-8 h-8 text-[#940019] mt-1" />
                   <div className="flex-1">
                     <div className="font-medium text-xl">Email</div>
                     <div className="text-[#b3001f]">info@elitecarshow.com</div>
@@ -317,8 +315,8 @@ export default function Page() {
             
             <div className="relative animate-slide-in-right h-[400px]">
               <Image
-                src="/images/1FDF780E-789E-42C8-9C51-5B91D8FCD7D2.jpeg"
-                alt="Contact Us"
+                src="/images/mixcollage-21-oct-2024-10-45-am-6299.avif"
+                alt="Tehran Location Map"
                 width={600}
                 height={400}
                 className="rounded-lg shadow-2xl hover:scale-105 transition-transform duration-500 w-full h-full object-cover"
@@ -328,14 +326,14 @@ export default function Page() {
                 <div className="p-8 w-full">
                   <div className="text-white space-y-2">
                     <h3 className="text-3xl font-bold animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-                      Visit Our Show
+                      Visit Our Show in Tehran
                     </h3>
                     <p className="text-lg opacity-90 animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
-                      Experience the ultimate luxury car exhibition
+                      Experience the ultimate luxury car exhibition in Iran's capital
                     </p>
                     <div className="flex gap-3 mt-4">
                       <span className="px-4 py-2 bg-[#940019] text-white rounded-full text-sm font-medium animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
-                        Premium Cars
+                        Tehran Location
                       </span>
                       <span className="px-4 py-2 bg-white/20 text-white rounded-full text-sm font-medium animate-fade-in-up" style={{ animationDelay: '1.1s' }}>
                         Luxury Experience
